@@ -11,7 +11,7 @@
 1. Start the jobs again
 
 ## Migration script
-1. Take users from the old db and put them in Q1
+1. [x] Take users from the old db and put them in Q1
 1. Take a user from Q1
     
     1. Create a new record in the db with userId, accessToken and copyright
@@ -34,3 +34,4 @@
 
 ### Cron jobs
 1. Work with new db
+1. Change the format of state DTO

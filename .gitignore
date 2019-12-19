@@ -102,3 +102,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Firbase Admin Keys
+*-admin-key.json
