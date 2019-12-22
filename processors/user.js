@@ -14,12 +14,15 @@ module.exports = async (job) => {
 
   const userImages = await getUserAllImage(accessToken);
 
-  userImages.forEach(image => {
+  await db.new.updateField(userId, 'lastSyncMaxId', userImages[0].postId);
+
+  userImages.forEach(({imageUrl, postedAt, postId}) => {
     imagesQueue.add({
       ownerId: userId,
       copyrightAttribution,
-      imageUrl: image.imageUrl,
-      postedAt: image.postedAt
+      postId,
+      imageUrl,
+      postedAt
     });
   });
 };

@@ -34,6 +34,7 @@ function retrieveImagesFromPost(post) {
   if (post.type === 'carousel') {
     return post['carousel_media'].map(media => ({
       ...media,
+      id: post['id'],
       'created_time': post['created_time']
     }))
   }
@@ -41,6 +42,7 @@ function retrieveImagesFromPost(post) {
 
 function normalizeDTO(imagePayload) {
   return {
+    postId: imagePayload.id,
     imageUrl: imagePayload.images['standard_resolution'].url,
     postedAt: imagePayload['created_time']
   };
