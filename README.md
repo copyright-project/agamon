@@ -12,18 +12,18 @@
 
 ## Migration script
 1. [x] Take users from the old db and put them in Q1
-1. Take a user from Q1
+1. [x] Take a user from Q1
     
-    1. Create a new record in the db with userId, accessToken and copyright
-    1. Get user's all images
-    1. Update last maxSyncedMaxId in the db
-    1. Put all images in the Q2
+    1. [x] Create a new record in the db with userId, accessToken and copyright
+    1. [x] Get user's all images
+    1. [x] Update last maxSyncedMaxId in the db
+    1. [x] Put all images in the Q2
 
-1. Take image from Q2
+1. [x] Take image from Q2
 
-    1. Calculate image hash
-    1. Create a new record in the contract
-    1. Update number of registered images
+    1. [x] Calculate image hash
+    1. [x] Create a new record in the contract
+    1. [x] Update number of registered images
 
 ## Changes to existing code base
 ### Authentication service

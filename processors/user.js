@@ -9,7 +9,7 @@ module.exports = async (job) => {
   const { userId, accessToken, copyrightAttribution } = job.data;
 
   await db.new.createUser(userId, {
-    accessToken, copyrightAttribution
+    accessToken, copyrightAttribution, registeredImages: 0
   });
 
   const userImages = await getUserAllImage(accessToken);
