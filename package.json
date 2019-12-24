@@ -1,7 +1,7 @@
 {
   "name": "agamon",
   "version": "1.0.0",
-  "description": "> Process of migrating state from one contract to another",
+  "description": "Process of migrating state from one smart contract to another one",
   "main": "migration.js",
   "dependencies": {
     "axios": "^0.19.0",

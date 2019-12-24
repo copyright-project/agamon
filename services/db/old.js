@@ -1,3 +1,4 @@
+const axios = require('axios');
 const auth = require('../auth');
 
 const BASE_URL = 'https://instagram-media-rights.firebaseio.com/test';

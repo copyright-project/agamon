@@ -1,3 +1,4 @@
+require('dotenv').config();
 const db = require('../services/db');
 const orbs = require('../services/orbs');
 const hash = require('../services/hash');

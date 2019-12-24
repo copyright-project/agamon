@@ -15,8 +15,8 @@ const usersWithFewImages = new Queue('usersWithFewImages', {
   }
 });
 
-usersWithManyImages.process('./processors/user');
-usersWithFewImages.process('./processors/user');
+usersWithManyImages.process(`${__dirname}/processors/user.js`);
+usersWithFewImages.process(`${__dirname}/processors/user.js`);
 
 (async function () {
   const users = await db.old.getAllUsers();

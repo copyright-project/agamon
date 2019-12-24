@@ -32,11 +32,13 @@ function retrieveImagesFromPost(post) {
     return [post];
   }
   if (post.type === 'carousel') {
-    return post['carousel_media'].map(media => ({
-      ...media,
-      id: post['id'],
-      'created_time': post['created_time']
-    }))
+    return post['carousel_media']
+      .filter(isEligibleMedia)
+      .map(media => ({
+        ...media,
+        id: post['id'],
+        'created_time': post['created_time']
+      }))
   }
 }
 
@@ -48,14 +50,19 @@ function normalizeDTO(imagePayload) {
   };
 }
 
+function isEligibleMedia(media) {
+  return media.type === 'image' || media.type === 'carousel';
+}
+
 async function getUserAllImage(accessToken) {
   const posts = await getAllUserPosts(accessToken);
-  const images = posts.reduce((acc, post) => {
+  const eligiblePosts = posts.filter(isEligibleMedia);
+
+  return eligiblePosts.reduce((acc, post) => {
     const images = retrieveImagesFromPost(post).map(normalizeDTO)
     acc.push(...images);
     return acc;
   }, []);
-  return images;
 }
 
 module.exports = {

@@ -1,3 +1,4 @@
+const axios = require('axios');
 const auth = require('../auth');
 
 const BASE_URL = 'https://open-rights.firebaseio.com/test';
@@ -21,9 +22,10 @@ const updateField = (userId, key, value) => {
 const incrementField = async (userId, key) => {
   const newDBToken = await auth.getNewDBToken();
   const url = `${BASE_URL}/${userId}/${key}.json?access_token=${newDBToken}`;
+
   const { data } = await axios.get(url);
-  const updatedCounter = parseInt(data[key], 10) + 1;
-  const { status } = await axios.put(url, updatedCounter);
+  const updatedCounter = parseInt(data, 10) + 1;
+  let { status } = await axios.put(url, String(updatedCounter));
   return status === 200;
 };
 
