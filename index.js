@@ -1,22 +1,5 @@
-const Queue = require('bull');
 const db = require('./services/db');
-
-const usersWithManyImages = new Queue('usersWithManyImages', {
-  limiter: {
-    max: 50,
-    duration: 1000 * 60 * 60
-  }
-});
-
-const usersWithFewImages = new Queue('usersWithFewImages', {
-  limiter: {
-    max: 200,
-    duration: 1000 * 60 * 60
-  }
-});
-
-usersWithManyImages.process(`${__dirname}/processors/user.js`);
-usersWithFewImages.process(`${__dirname}/processors/user.js`);
+const { addToQueue, QUEUES } = require('./services/queues');
 
 (async function () {
   const users = await db.old.getAllUsers();
@@ -29,9 +12,10 @@ usersWithFewImages.process(`${__dirname}/processors/user.js`);
     } = users[userId];
 
     if (registeredImages && registeredImages >= 1000) {
-      usersWithManyImages.add({ userId, accessToken, copyrightAttribution });
+      addToQueue(QUEUES.USERS.WITH_MANY_IMAGES, { userId, accessToken, copyrightAttribution });
+      usersWithManyImages.add();
     } else {
-      usersWithFewImages.add({ userId, accessToken, copyrightAttribution });
+      addToQueue(QUEUES.USERS.WITH_FEW_IMAGES, { userId, accessToken, copyrightAttribution });
     }
   });
 })();
