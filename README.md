@@ -14,6 +14,7 @@
 1. [x] Take users from the old db and put them in Q1
 1. [x] Take a user from Q1
     
+    1. [x] Check that Instagram access token is valid
     1. [x] Create a new record in the db with userId, accessToken and copyright
     1. [x] Get user's all images
     1. [x] Update last maxSyncedMaxId in the db

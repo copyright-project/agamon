@@ -65,6 +65,16 @@ async function getUserAllImage(accessToken) {
   }, []);
 }
 
+async function isValidAccessToken(token) {
+  try {
+    await axios.get(`https://api.instagram.com/v1/users/self/?access_token=${token}`);
+  } catch (error) {
+    return false;
+  }
+  return true;
+}
+
 module.exports = {
-  getUserAllImage
+  getUserAllImage,
+  isValidAccessToken
 };
