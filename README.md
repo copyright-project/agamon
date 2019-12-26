@@ -3,7 +3,7 @@
 
 ## High-level procedure
 1. Move authentication service to register users in a new db
-1. Make changes in image-hash service
+1. [x] Make changes in image-hash service
 1. Stop sync jobs
 1. Deploy new contract
 1. Run migration script
@@ -27,10 +27,10 @@
 
 ## Changes to existing code base
 ### Authentication service
-1. Change db url to store newly registered users
+1. [x] Change db url to store newly registered users
 
 ### Image hash
-1. Change api of `/hash` to return binary hash of the image too
+1. [x] Change api of `/hash` to return binary hash of the image too
 
 ### Cron jobs
 1. Work with new db
