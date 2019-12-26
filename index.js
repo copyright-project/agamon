@@ -13,7 +13,6 @@ const { addToQueue, QUEUES } = require('./services/queues');
 
     if (registeredImages && registeredImages >= 1000) {
       addToQueue(QUEUES.USERS.WITH_MANY_IMAGES, { userId, accessToken, copyrightAttribution });
-      usersWithManyImages.add();
     } else {
       addToQueue(QUEUES.USERS.WITH_FEW_IMAGES, { userId, accessToken, copyrightAttribution });
     }

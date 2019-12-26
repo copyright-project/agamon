@@ -9,18 +9,18 @@ const QUEUES = {
   IMAGES: 'images'
 };
 
-const SAMPLE_TIMER = 1000 * 10;
+const SAMPLE_TIMER = 1000 * 5;
 
 const usersWithManyImages = new Queue('usersWithManyImages', {
   limiter: {
-    max: 50,
+    max: 20,
     duration: 1000 * 60 * 60
   }
 });
 
 const usersWithFewImages = new Queue('usersWithFewImages', {
   limiter: {
-    max: 200,
+    max: 100,
     duration: 1000 * 60 * 60
   }
 });

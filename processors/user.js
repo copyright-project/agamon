@@ -20,7 +20,10 @@ module.exports = async (job) => {
     const userImages = await getUserAllImage(accessToken);
 
     await db.local.initRegisteredImageForUser(userId);
-    await db.new.updateField(userId, 'lastSyncMaxId', userImages[0].postId);
+
+    if (userImages.length > 0) {
+      await db.new.updateField(userId, 'lastSyncMaxId', userImages[0].postId);
+    }
 
     userImages.forEach(({ imageUrl, postedAt, postId }) => {
       addToQueue(
@@ -37,5 +40,6 @@ module.exports = async (job) => {
     return;
   } catch (error) {
     console.log(error);
+    console.log(userId);
   }
 };
