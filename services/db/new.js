@@ -1,7 +1,7 @@
 const axios = require('axios');
 const auth = require('../auth');
 
-const BASE_URL = 'https://open-rights.firebaseio.com/users';
+const BASE_URL = 'https://open-rights.firebaseio.com/test';
 
 const updateDBCall = async (userId, payload) => {
   const newDBToken = await auth.getNewDBToken();

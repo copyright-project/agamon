@@ -8,14 +8,18 @@ module.exports = async (job) => {
     ownerId,
     copyrightAttribution,
     imageUrl,
-    postedAt,
-    postId
+    postedAt
   } = job.data;
 
   const { binaryHash, pHash } = await hash.calculate(imageUrl);
 
-  const payload = `${postId}|${postedAt}|${copyrightAttribution}|${imageUrl}`;
-  const isSuccess = await orbs.registerImage(binaryHash, pHash, payload);
+  const isSuccess = await orbs.registerImage(
+    pHash,
+    imageUrl,
+    postedAt,
+    copyrightAttribution,
+    binaryHash
+  );
 
   if (isSuccess) {
     await db.local.updateRegisteredImagesForUser(ownerId);

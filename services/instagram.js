@@ -45,7 +45,7 @@ function retrieveImagesFromPost(post) {
 function normalizeDTO(imagePayload) {
   return {
     postId: imagePayload.id,
-    imageUrl: imagePayload.images['standard_resolution'].url,
+    imageUrl: imagePayload.images['thumbnail'].url,
     postedAt: imagePayload['created_time']
   };
 }

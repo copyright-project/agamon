@@ -23,14 +23,16 @@ const client = new Client(
   })
 );
 
-const registerImage = async (binaryHash, pHash, payload) => {
+const registerImage = async (pHash, imageURL, postedAt, copyrights, binaryHash) => {
   const [tx] = await client.createTransaction(
     'OpenRights01',
     'registerMedia',
     [
-      argString(binaryHash),
       argString(pHash),
-      argString(payload)
+      argString(imageURL),
+      argString(postedAt),
+      argString(copyrights),
+      argString(binaryHash),
     ]);
   const receipt = await client.sendTransaction(tx);
   return (

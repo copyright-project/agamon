@@ -1,7 +1,7 @@
 const axios = require('axios');
 const auth = require('../auth');
 
-const BASE_URL = 'https://instagram-media-rights.firebaseio.com/users';
+const BASE_URL = 'https://instagram-media-rights.firebaseio.com/test';
 
 const getAllUsers = async () => {
   const tokenToOldDB = await auth.getOldDBToken();
