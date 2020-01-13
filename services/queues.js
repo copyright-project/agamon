@@ -1,5 +1,6 @@
-const Queue = require('bull');
 const db = require('./db');
+const Queue = require('bull');
+const logger = require('./logger');
 
 const QUEUES = {
   USERS: {
@@ -14,14 +15,16 @@ const SAMPLE_TIMER = 1000 * 5;
 const usersWithManyImages = new Queue('usersWithManyImages', {
   limiter: {
     max: 20,
-    duration: 1000 * 60 * 60
+    duration: 1000 * 60 * 60,
+    bounceBack: true
   }
 });
 
 const usersWithFewImages = new Queue('usersWithFewImages', {
   limiter: {
     max: 100,
-    duration: 1000 * 60 * 60
+    duration: 1000 * 60 * 60,
+    bounceBack: true
   }
 });
 
@@ -38,7 +41,7 @@ const nameToQueueMap = {
 };
 
 imagesQueue.on('drained', async () => {
-  console.log('all images are processed');
+  logger.info('all images are processed');
   const registeredImagesMap = await db.local.getRegisteredImagesForAllUsers();
   await Promise.all(Object.entries(registeredImagesMap).map(([key, value]) => db.new.updateField(key, 'registeredImagesCount', value)));
 });
@@ -55,7 +58,7 @@ const printProgress = async () => {
     usersWithManyImages.getWaitingCount(),
     imagesQueue.getWaitingCount()
   ]);
-  console.log(`${waitingJobsCounts[0] + waitingJobsCounts[1]} users | ${waitingJobsCounts[2]} images are left`);
+  logger.info(`${waitingJobsCounts[0] + waitingJobsCounts[1]} users | ${waitingJobsCounts[2]} images are left`);
 };
 
 setInterval(printProgress, SAMPLE_TIMER);

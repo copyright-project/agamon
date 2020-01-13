@@ -25,7 +25,7 @@ const client = new Client(
 
 const registerImage = async (pHash, imageURL, postedAt, copyrights, binaryHash) => {
   const [tx] = await client.createTransaction(
-    'OpenRights01',
+    'OpenRights02',
     'registerMedia',
     [
       argString(pHash),

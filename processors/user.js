@@ -1,5 +1,6 @@
 require('dotenv').config();
 const db = require('../services/db');
+const logger = require('../services/logger');
 const { addToQueue, QUEUES } = require('../services/queues');
 const { getUserAllImage, isValidAccessToken } = require('../services/instagram');
 
@@ -8,7 +9,7 @@ module.exports = async (job) => {
 
   const isValid = await isValidAccessToken(accessToken);
   if (!isValid) {
-    console.log(`User ${userId} has invalid access token`);
+    logger.info(`User ${userId} has invalid access token`);
     return;
   }
 
@@ -39,7 +40,7 @@ module.exports = async (job) => {
     });
     return;
   } catch (error) {
-    console.log(error);
-    console.log(userId);
+    logger.error(error);
+    logger.error(userId);
   }
 };
