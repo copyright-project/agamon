@@ -56,7 +56,7 @@ const updateRegisteredImages = async () => {
   await Promise.all(
     Object
       .entries(registeredImagesMap)
-      .map(([key, value]) => db.new.updateField(key, 'registeredImagesCount', value))
+      .map(([key, value]) => db.new.updateFields(key, { registeredImagesCount: value, isSyncedBack: true }))
   );
 };
 

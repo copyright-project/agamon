@@ -19,7 +19,12 @@ const updateField = (userId, key, value) => {
   return updateDBCall(userId, payload)
 };
 
+const updateFields = (userId, payload) => {
+  return updateDBCall(userId, payload)
+};
+
 module.exports = {
   createUser,
-  updateField
+  updateField,
+  updateFields
 };

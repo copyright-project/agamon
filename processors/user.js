@@ -23,7 +23,7 @@ module.exports = async (job) => {
     await db.local.initRegisteredImageForUser(userId);
 
     if (userImages.length > 0) {
-      await db.new.updateField(userId, 'lastSyncMaxId', userImages[0].postId);
+      await db.new.updateField(userId, 'lastSyncedMaxId', userImages[0].postId);
     }
 
     userImages.forEach(({ imageUrl, postedAt, postId }) => {
