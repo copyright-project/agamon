@@ -8,19 +8,18 @@ const logger = createLogger({
     }),
     format.errors({ stack: true }),
     format.splat(),
-    format.json()
+    format.simple()
   ),
-  defaultMeta: { service: 'agamon' },
   transports: [
     new transports.File({ filename: 'agamon-error.log', level: 'error' }),
     new transports.File({ filename: 'agamon-combined.log' })
   ]
 });
 
-//
+
 // If we're not in production then **ALSO** log to the `console`
 // with the colorized simple format.
-//
+
 // if (process.env.NODE_ENV !== 'production') {
 //   logger.add(new transports.Console({
 //     format: format.combine(
