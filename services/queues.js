@@ -10,7 +10,7 @@ const QUEUES = {
   IMAGES: 'images'
 };
 
-const SAMPLE_TIMER = 1000 * 5;
+const SAMPLE_TIMER = 1000 * 20;
 
 const usersWithManyImages = new Queue('usersWithManyImages', {
   limiter: {
