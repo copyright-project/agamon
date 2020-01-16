@@ -15,25 +15,18 @@ const SAMPLE_TIMER = 1000 * 5;
 const usersWithManyImages = new Queue('usersWithManyImages', {
   limiter: {
     max: 20,
-    duration: 1000 * 60 * 60,
-    bounceBack: true
+    duration: 1000 * 60 * 60
   }
 });
 
 const usersWithFewImages = new Queue('usersWithFewImages', {
   limiter: {
     max: 100,
-    duration: 1000 * 60 * 60,
-    bounceBack: true
+    duration: 1000 * 60 * 60
   }
 });
 
-const imagesQueue = new Queue('images', {
-  limiter: {
-    max: 7,
-    duration: 1000
-  }
-});
+const imagesQueue = new Queue('images');
 
 usersWithManyImages.process(`${process.cwd()}/processors/user.js`);
 usersWithFewImages.process(`${process.cwd()}/processors/user.js`);
