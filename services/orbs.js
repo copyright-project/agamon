@@ -25,7 +25,7 @@ const client = new Client(
 
 const registerImage = async (pHash, imageURL, postedAt, copyrights, binaryHash) => {
   const [tx] = await client.createTransaction(
-    'OpenRights03',
+    'OpenRights04',
     'registerMedia',
     [
       argString(pHash),
@@ -37,7 +37,8 @@ const registerImage = async (pHash, imageURL, postedAt, copyrights, binaryHash) 
   const receipt = await client.sendTransaction(tx);
   return (
     receipt.executionResult === 'SUCCESS' &&
-    receipt.requestStatus === 'COMPLETED'
+    receipt.requestStatus === 'COMPLETED' &&
+    receipt.transactionStatus === 'COMMITTED'
   );
 };
 
