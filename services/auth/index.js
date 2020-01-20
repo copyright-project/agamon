@@ -8,6 +8,8 @@ const scopes = [
   "https://www.googleapis.com/auth/firebase.database"
 ];
 
+let oldTokenCache, newTokenCache;
+
 // Authenticate a JWT client with the service account.
 const oldJWTClient = new google.auth.JWT(
   oldDBServiceAccount.client_email,
@@ -24,6 +26,9 @@ const newJWTClient = new google.auth.JWT(
 );
 
 const getOldDBToken = async () => {
+  if (oldTokenCache !== undefined) {
+    return Promise.resolve(oldTokenCache);
+  }
   return new Promise((resolve, reject) => {
     oldJWTClient.authorize((error, tokens) => {
       if (error) {
@@ -33,6 +38,7 @@ const getOldDBToken = async () => {
         console.log("Provided service account does not have permission to generate access tokens");
         reject("Provided service account does not have permission to generate access tokens");
       } else {
+        oldTokenCache = tokens.access_token;
         resolve(tokens.access_token);
       }
     });
@@ -40,6 +46,9 @@ const getOldDBToken = async () => {
 };
 
 const getNewDBToken = async () => {
+  if (newTokenCache !== undefined) {
+    return Promise.resolve(newTokenCache);
+  }
   return new Promise((resolve, reject) => {
     newJWTClient.authorize((error, tokens) => {
       if (error) {
@@ -49,6 +58,7 @@ const getNewDBToken = async () => {
         console.log("Provided service account does not have permission to generate access tokens");
         reject("Provided service account does not have permission to generate access tokens");
       } else {
+        newTokenCache = tokens.access_token;
         resolve(tokens.access_token);
       }
     });
