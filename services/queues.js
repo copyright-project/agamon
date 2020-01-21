@@ -15,7 +15,7 @@ const SAMPLE_TIMER = 1000 * 20;
 const usersWithManyImages = new Queue('usersWithManyImages', {
   limiter: {
     max: 20,
-    duration: 1000 * 60 * 60
+    duration: 1000 * 60 * 30
   }
 });
 
@@ -54,6 +54,9 @@ const updateRegisteredImages = async () => {
 };
 
 const isMigrationDone = ({ users, images }) =>
+  users.delayed === 0 &&
+  users.waiting === 0 &&
+  users.active === 0 &&
   images.completed > 0 &&
   images.waiting === 0 &&
   images.active === 0 &&
